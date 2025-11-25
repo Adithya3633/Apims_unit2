@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <title>Spring Boot Quick Guide</title>
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --accent:#38bdf8; /* cyan */
+      --muted:#94a3b8; /* gray */
+      --heading:#7c3aed; /* violet */
+      --section-bg:#071226;
+      --code-bg:#0b1220;
+      --ok:#10b981; /* green */
+      --danger:#ef4444; /* red */
+      --card-radius:12px;
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background:linear-gradient(180deg,var(--bg),#051027);color:#e6eef8}
+    .container{max-width:900px;margin:36px auto;padding:28px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:var(--card-radius);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--heading),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
+    h1{margin:0;font-size:1.6rem;color:var(--heading)}
+    p.lead{color:var(--muted);margin-top:6px}
+    section{background:var(--section-bg);padding:18px;border-radius:10px;margin-top:16px}
+    section h2{color:var(--accent);margin-top:0}
+    ul{margin:8px 0 0 20px;color:#dff3ff}
+    li{margin:6px 0}
+    code, pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;background:var(--code-bg);padding:10px;border-radius:8px;display:block;color:#cde9ff;overflow:auto}
+    .inline{display:inline-block;padding:2px 8px;border-radius:6px;background:#071a2a;color:var(--accent);font-weight:600}
+    .btns{display:flex;gap:10px;margin-top:14px}
+    .btn{background:var(--heading);color:white;padding:8px 12px;border-radius:8px;border:0;cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    footer{margin-top:20px;color:var(--muted);font-size:0.9rem}
+    .note{border-left:3px solid var(--accent);padding-left:12px;color:var(--muted);margin-top:12px}
+    .example-code{margin-top:10px}
+    @media (max-width:640px){.container{margin:18px;padding:16px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">SB</div>
+      <div>
+        <h1>Spring Boot Quick Guide Unit-2</h1>
+       
+      </div>
+    </header>
+
+    <section>
+      <h2>Steps to create a Spring Boot application</h2>
+      <ol>
+        <li><strong>Install JDK</strong><br><span class="inline">Install JDK for Java development.</span></li>
+        <li><strong>Install Eclipse IDE</strong><br><span class="inline">Install Eclipse IDE/STS for Java development.</span></li>
+        <li><strong>Project initialization</strong><br>Use Spring Initializer of <a href="https://start.spring.io" style="color:var(--accent)" target="_blank">spring.io</a> to generate a Spring Boot project. Define your <strong>Group ID</strong>, <strong>Artifact ID</strong>, and add dependencies such as <strong>Spring Boot Starter Web</strong>. This generates a structured project with all necessary configurations.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Main application class (Starting or initializing a Spring application)</h2>
+      <p>Create a Java class annotated with <code>@SpringBootApplication</code>. This annotation is a shorthand for:</p>
+      <ul>
+        <li><code>@Configuration</code> – marks class as a source for bean definitions</li>
+        <li><code>@EnableAutoConfiguration</code> – enables automatic configuration based on dependencies</li>
+        <li><code>@ComponentScan</code> – scans for other components and beans</li>
+      </ul>
+
+      <div class="example-code">
+        <pre><code>@SpringBootApplication
+public class DemoApp {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApp.class, args);
+    }
+}
+        </code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>Start embedded server</h2>
+      <p>Spring Boot automatically configures <strong>Tomcat or Jetty</strong>. No need for external server deployment — just run the app as a Java application.</p>
+    </section>
+
+    <section>
+      <h2>Create a REST Controller</h2>
+      <p>Define REST endpoints using <code>@RestController</code> and mapping annotations such as <code>@GetMapping</code>.</p>
+
+      <div class="example-code">
+        <pre><code>@RestController
+public class HelloController {
+
+    @GetMapping("/hello")
+    public String sayHello() {
+        return "Hello";
+    }
+}
+        </code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>Spring Boot configuration management</h2>
+      <p>Use <code>application.properties</code> or <code>application.yml</code> to set properties like <strong>server port</strong>.</p>
+    </section>
+
+    <section>
+      <h2>Run the application</h2>
+      <p>Execute the <code>main()</code> method of the main class. Access endpoints like:</p>
+      <p class="inline">http://localhost:8081/hello</p>
+      <p style="color:var(--muted)">to see app responses.</p>
+    </section>
+
+    <section>
+      <h2>Extending with dependencies</h2>
+      <p>Spring Boot removes the need for XML configurations, simplifying setup. You can extend it with dependencies (modules) such as <strong>Spring Data JPA</strong> by including starters. Spring Boot auto-configures these modules and minimizes manual configuration.</p>
+    </section>
+
+    <section>
+      <h1>Essential concepts of Spring Boot</h1>
+      <ul>
+        <li><strong>Convention over configuration</strong><br>Spring Boot provides sensible defaults to reduce required setup.</li>
+        <li><strong>Auto-configuration</strong><br>Framework automatically configures Spring applications based on available dependencies.</li>
+        <li><strong>Embedded servers</strong><br>Spring Boot packages applications with embedded servers like Tomcat/Jetty, so apps run standalone without external servers.</li>
+        <li><strong>Production-ready features</strong><br>Includes built-in <code>Actuator</code> endpoints for monitoring and health checks.</li>
+        <li><strong>Simplifies development</strong><br>Overall, it simplifies Java development by hiding underlying complexities and enabling rapid application development with minimal configuration.</li>
+      </ul>
+    </section>
+
+    
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Spring Boot Autowiring Guide</title>
+<style>
+  body{background:#0f1724;color:#e6eef8;font-family:Inter,system-ui;padding:24px}
+  .container{max-width:900px;margin:auto;background:#0b1220;padding:24px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+  h1{color:#7c3aed}
+  h2{color:#38bdf8;margin-top:28px}
+  ul{margin-left:20px}
+  code,pre{background:#071226;padding:12px;border-radius:8px;color:#cde9ff;display:block;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Autowiring in Spring / Spring Boot</h1>
+
+<p>Autowiring is an automatic dependency injection mechanism used by the Spring framework. It wires beans automatically, eliminating explicit configuration. In Spring Boot autowiring is primarily used and enabled by annotations.</p>
+
+<h2>Modes of Autowiring</h2>
+
+<h3>1. No Autowiring (default)</h3>
+<p>No automatic injection is performed. Dependencies must be wired manually.</p>
+<pre><code>&lt;bean id="cd" class="sample.city" autowire="no"/&gt;</code></pre>
+
+<h3>2. By Name</h3>
+<p>Injects bean whose name matches the property name. Property name and bean name must be the same.</p>
+<pre><code>&lt;bean id="city" class="sample.city" autowire="byName"/&gt;</code></pre>
+
+<h3>3. By Type</h3>
+<p>Injects bean by matching the property’s class type. Only one bean of that type should exist; otherwise, error occurs.</p>
+<pre><code>&lt;bean id="city" class="sample.city" autowire="byType"/&gt;</code></pre>
+
+<h3>4. Constructor</h3>
+<p>Injects dependencies by matching constructor parameter types.</p>
+<pre><code>&lt;bean id="city" class="sample.city" autowire="constructor"/&gt;</code></pre>
+
+<h3>5. Autodetect (Deprecated)</h3>
+<p>Attempts constructor autowiring first; if it fails, falls back to byType. Deprecated from Spring 3.0.</p>
+<pre><code>&lt;bean id="city" class="sample.city" autowire="autodetect"/&gt;</code></pre>
+
+<h3>Modern Spring Boot Autowiring with Annotations</h3>
+<p>Spring Boot prefers annotation‑driven dependency injection using <code>@Autowired</code>.</p>
+
+<h3>Constructor Injection (Recommended)</h3>
+<pre><code>@Component
+public class B{
+ public void show(){
+    System.out.println("Inside B"); }
+}
+@Component
+public class A {
+    private final B b;
+
+    @Autowired
+    public A(B b) {
+        this.b=b;
+    }
+}</code></pre>
+
+<h3>Setter Injection</h3>
+<pre><code>@Component
+public class B
+{
+  public void show(){
+    System.out.println("Inside B"); }
+}
+@Component
+public class A {
+    private B b;
+
+    @Autowired
+    public void setB(B b) {
+        this.B=b;
+    }
+}</code></pre>
+
+<h3>When Multiple Beans of Same Type Exist</h3>
+<p>Use <code>@Qualifier</code> to specify which bean to inject.</p>
+<pre><code>@Component
+public class Test {
+    @Autowired
+    @Qualifier("state1")
+    private State state;
+}</code></pre>
+
+</div>
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Spring Bean Scopes Guide</title>
+<style>
+body{background:#0f1724;color:#e6eef8;font-family:Inter,system-ui;padding:24px}
+.container{max-width:900px;margin:auto;background:#0b1220;padding:24px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+h1{color:#7c3aed}
+h2{color:#38bdf8;margin-top:28px}
+ul{margin-left:20px}
+code,pre{background:#071226;padding:12px;border-radius:8px;color:#cde9ff;display:block;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="container">
+
+
+<h1>Spring Bean Scopes</h1>
+<p>Spring beans can have different scopes describing their life cycle and visibility within the application context or HTTP request life cycle. The most commonly used scopes are:</p>
+
+
+<h2>1. Singleton Scope (Default)</h2>
+<ul>
+<li>Only one instance of the bean is created by the Spring IoC container.</li>
+<li>Every request for the bean returns the same shared instance.</li>
+<li>Suitable for stateless beans or shared services.</li>
+<li>Improves efficiency by reusing the same instance.</li>
+<li>Important to design thread‑safe implementations in multi‑threaded apps.</li>
+<li>This is the default scope if no scope is specified.</li>
+</ul>
+<pre><code>@Component
+public class MySingletonBean {
+// statements
+}</code></pre>
+
+
+<h2>2. Prototype Scope</h2>
+<ul>
+<li>A new instance is created every time the bean is requested from the container.</li>
+<li>Useful for stateful or short‑lived beans where each user needs a fresh instance.</li>
+<li>Spring manages creation but not full life cycle (destruction not handled).</li>
+<li>Higher memory usage but full isolation between instances.</li>
+<li>Not recommended as a dependency of Singleton beans unless managed carefully.</li>
+</ul>
+<pre><code>@Component
+@Scope("prototype")
+public class MyPrototypeBean {
+// statements
+}</code></pre>
+
+
+<h2>3. Request Scope (Web‑Aware)</h2>
+<ul>
+<li>A new bean instance is created for every HTTP request.</li>
+<li>Bean lives and is accessible only during that single request.</li>
+<li>Used for request‑specific data.</li>
+<li>Valid only in web‑aware Spring applications.</li>
+<li>Multiple accesses within the same request return the same instance.</li>
+</ul>
+<pre><code>@Component
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class MyRequestScopedBean {
+}
+</code></pre>
+
+
+<h2>4. Session Scope (Web‑Aware)</h2>
+<ul>
+<li>A new bean instance is created for every HTTP session.</li>
+<li>Bean lives throughout the session life cycle until destroyed.</li>
+<li>Suitable for session‑specific or user‑specific data.</li>
+<li>Requires a web‑aware Spring application context.</li>
+</ul>
+<pre><code>@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class MySessionScopedBean {
+}
+</code></pre>
+
+
+</div>
+</body>
+</html>
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spring AOP Guide</title>
+<style>
+  body{background:#0f1724;color:#e6eef8;font-family:Inter,system-ui;padding:24px}
+  .container{max-width:900px;margin:auto;background:#0b1220;padding:24px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+  h1{color:#7c3aed}
+  h2{color:#38bdf8;margin-top:28px}
+  code,pre{background:#071226;padding:12px;border-radius:8px;color:#cde9ff;display:block;margin-top:10px}
+  ul{margin-left:20px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Spring AOP and Cross-Cutting Concerns</h1>
+
+<p>Spring AOP (Aspect Oriented Programming) helps you handle things that affect many parts of your application in one place. These are called <b>cross-cutting concerns</b> such as logging, security, or transactions.</p>
+
+<h2>Cross-Cutting Concerns</h2>
+<ul>
+  <li>They are functionalities affecting multiple modules but are not part of the core business logic.</li>
+  <li>Examples:</li>
+  <ul>
+    <li>Logging every method call</li>
+    <li>Exception handling globally</li>
+    <li>Security checks</li>
+  </ul>
+  <li>Without AOP these concerns get duplicated across classes → hard to maintain.</li>
+</ul>
+
+<h2>Core Concepts of Spring AOP</h2>
+
+<h3>1. Aspect</h3>
+<p>Modularization of cross-cutting concerns, e.g., a logging aspect.</p>
+
+<h3>2. Join Point</h3>
+<p>A point in the execution of a program such as method invocation or exception handling.</p>
+
+<h3>3. Advice</h3>
+<p>Action taken by an aspect at a particular join point.</p>
+<ul>
+  <li><b>Before</b> – runs before method execution</li>
+  <li><b>After</b> – runs after method execution</li>
+  <li><b>After Returning</b> – runs after successful execution</li>
+  <li><b>After Throwing</b> – runs when an exception occurs</li>
+  <li><b>Around</b> – runs before & after method call</li>
+</ul>
+
+<h3>4. Pointcut</h3>
+<p>A rule that decides on which methods the advice should apply.</p>
+
+<h2>Example Logging Aspect</h2>
+
+<pre><code>@Aspect
+@Component
+public class LogAspect {
+    @Before("execution(* com.example.service.*.*(..))")
+    public void beforeMethod() {
+        System.out.println("A service method is about to run");
+    }
+}
+</code></pre>
+  <p><strong>Use case:</strong> Logging inputs, validations.</p>
+<h2>Implementation of AOP Advices </h2>
+
+ <h3 class="subtitle">1. Before Advice</h3>
+  <p>Runs <strong>before</strong> the method completes (success or exception).</p>
+  <pre><code>
+@Before("execution(* com.example.service..*(..))")
+public void beforeAdvice() {
+    System.out.println("Beforemethod is about to be executed");
+}
+  </code></pre>
+  <p><strong>Use case:</strong> Cleanup tasks.</p>
+
+  <h3 class="subtitle">2. After Advice</h3>
+  <p>Runs <strong>after</strong> the method completes (success or exception).</p>
+  <pre><code>@After("execution(* com.example.service..*(..))")
+public void afterAdvice() {
+    System.out.println("After method has completed");
+}
+  </code></pre>
+  <p><strong>Use case:</strong> Cleanup tasks.</p>
+
+  <h3 class="subtitle">3. After Returning Advice</h3>
+  <p>Runs only if method completes successfully.</p>
+  <pre><code>@AfterReturning(
+    pointcut = "execution(* com.example.service..*(..))",
+    returning = "result"
+)
+public void afterReturningAdvice(Object result) {
+    System.out.println("Method returned value: " + result);
+}
+  </code></pre>
+  <p><strong>Use case:</strong> Post-processing results.</p>
+
+  <h3 class="subtitle">4. After Throwing Advice</h3>
+  <p>Runs only if method exits by throwing an exception.</p>
+  <pre><code>@AfterThrowing(
+    pointcut = "execution(* com.example.service..*(..))",
+    throwing = "ex"
+)
+public void afterThrowingAdvice(Exception ex) {
+    System.out.println("Exception thrown: " + ex.getMessage());
+}
+  </code></pre>
+  <p><strong>Use case:</strong> Error logging.</p>
+
+  <h3 class="subtitle">5. Around Advice</h3>
+  <p>Wraps method execution — runs before & after, and can control whether method is executed.</p>
+  <pre><code>@Around("execution(* com.example.service..*(..))")
+public Object aroundAdvice(ProceedingJoinPoint pjp) throws Throwable {
+    System.out.println("Around BEFORE method call");
+    Object r = pjp.proceed();
+    System.out.println("Around AFTER method call");
+    return r;
+}
+  </code></pre>
+  <p><strong>Use case:</strong> Measuring execution time, transaction management.</p>
+</section>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Best Practices — Logging & Error Handling (Spring Boot)</title>
+  <style>
+    :root{--bg:#071026;--card:#0b1220;--accent:#38bdf8;--muted:#94a3b8;--heading:#7c3aed}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg),#02101a);color:#e6eef8}
+    .wrap{max-width:900px;margin:36px auto;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+    h1{color:var(--heading);margin:0 0 8px}
+    p.lead{color:var(--muted);margin-top:0}
+    ul{margin-left:20px;color:#dff3ff}
+    li{margin:8px 0}
+    .code{background:var(--card);padding:14px;border-radius:10px;margin-top:12px;color:#cde9ff;font-family:ui-monospace,Menlo,Monaco,monospace}
+    .meta{color:var(--muted);font-size:0.95rem}
+    img.screenshot{width:100%;border-radius:10px;margin-top:16px;border:1px solid rgba(255,255,255,0.03)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Best Practices for Error Handling and Logging in Spring Boot</h1>
+    <p class="lead">Aligned notes — content unchanged.</p>
+
+    <div class="code">
+      <ul>
+        <li>Use <strong>SLF4J with Logback</strong> (default and recommended logging setup for Spring Boot).</li>
+        <li>Avoid using <strong>System.out</strong> or <strong>System.err</strong> prints; system prints lack features like log levels, filtering, and formatting.</li>
+        <li>Log <strong>meaningful messages</strong> — include useful context such as inputs, method names, etc.</li>
+        <li>Test logging outputs — include <strong>unit and integration tests</strong> to verify that important events and errors are logged appropriately.</li>
+        <li>Log exceptions properly — use <code>logger.error("message", exception)</code> to capture <strong>stack traces</strong> and error context.</li>
+        <li>Customize logging through <code>application.properties</code> or separate <code>logback-spring.xml</code> configuration files.</li>
+      </ul>
+    </div>
+
+    </div>
+</body>
+</html>
+
+</head>
+<body>
+
+    <h1>@RestController Annotation in Spring Boot</h1>
+
+    <p><code>@RestController</code> is a convenience annotation in Spring Boot that combines:</p>
+    <ul>
+        <li><code>@Controller</code> – Indicates the class handles REST endpoints.</li>
+        <li><code>@ResponseBody</code> – Automatically serializes returned values to JSON/XML and writes to the HTTP response body.</li>
+    </ul>
+
+    <p>This helps create RESTful web services easily by removing the need to annotate each method with <code>@ResponseBody</code>.</p>
+
+    <h3>Key Significance & Benefits</h3>
+    <ul>
+        <li>Enables building REST APIs quickly.</li>
+        <li>Simplifies controller classes.</li>
+        <li>Supports returning Java objects directly; Spring Boot converts them into JSON/XML.</li>
+        <li>Improves separation of presentation and business logic.</li>
+        <li>Works smoothly with Spring’s message converters.</li>
+    </ul>
+
+    <h3>Example</h3>
+    <pre><code>@RestController
+public class GreetingController {
+
+    @GetMapping("/greet")
+    public String greet() {
+        return "Hello";
+    }
+}
+</code></pre>
+
+</body>
+</html>
+
+<h1>Building a Spring Boot Application with Exception Handling Using AOP</h1>
+<p> Creating an aspect that catches exception thrown by controller methods helps centralized error handling and keeps controllers clean </p>
+<pre><code>// Step 1: Simple Controller
+@Controller
+public class MyController {
+
+    @GetMapping("/test")
+    public String testEndpoint() {
+        throw new RuntimeException("Test exception");
+    }
+}
+
+// Step 2: Exception Handling Aspect
+@Aspect
+@Component
+public class ExceptionAspect {
+
+    @AfterThrowing(
+        pointcut = "execution(* com.example.MyController.*(..))",
+        throwing = "ex"
+    )
+    public void handleException(Exception ex) {
+        System.out.println("Exception caught in Aspect: " + ex.getMessage());
+    }
+}
+</code></pre>  </html
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Best Practices — Logging & Error Handling (Spring Boot)</title>
+  <style>
+    :root{--bg:#071026;--card:#0b1220;--accent:#38bdf8;--muted:#94a3b8;--heading:#7c3aed}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg),#02101a);color:#e6eef8}
+    .wrap{max-width:900px;margin:36px auto;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+    h1{color:var(--heading);margin:0 0 8px}
+    p.lead{color:var(--muted);margin-top:0}
+    ul{margin-left:20px;color:#dff3ff}
+    li{margin:8px 0}
+    .code{background:var(--card);padding:14px;border-radius:10px;margin-top:12px;color:#cde9ff;font-family:ui-monospace,Menlo,Monaco,monospace}
+    .meta{color:var(--muted);font-size:0.95rem}
+    img.screenshot{width:100%;border-radius:10px;margin-top:16px;border:1px solid rgba(255,255,255,0.03)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Best Practices for Error Handling and Logging in Spring Boot</h1>
+    <p class="lead">Aligned notes — content unchanged.</p>
+
+    <div class="code">
+      <ul>
+        <li>Use <strong>SLF4J with Logback</strong> (default and recommended logging setup for Spring Boot).</li>
+        <li>Avoid using <strong>System.out</strong> or <strong>System.err</strong> prints; system prints lack features like log levels, filtering, and formatting.</li>
+        <li>Log <strong>meaningful messages</strong> — include useful context such as inputs, method names, etc.</li>
+        <li>Test logging outputs — include <strong>unit and integration tests</strong> to verify that important events and errors are logged appropriately.</li>
+        <li>Log exceptions properly — use <code>logger.error("message", exception)</code> to capture <strong>stack traces</strong> and error context.</li>
+        <li>Customize logging through <code>application.properties</code> or separate <code>logback-spring.xml</code> configuration files.</li>
+      </ul>
+    </div>
+
+
+  </div>
+</body>
+</html>
+
